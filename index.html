@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة اللسانيات - الواجهة الرئيسة</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* المتغيرات اللونية (تدرجات البني) */
+        :root {
+            --primary-color: #5D4037;    /* بني غامق للهوية والعناصر الرئيسية */
+            --secondary-color: #8D6E63;  /* بني متوسط للنصوص الثانوية والأيقونات */
+            --accent-color: #D7CCC8;     /* بني فاتح للخلفيات والتفاصيل */
+            --bg-color: #F8F6F4;         /* خلفية الصفحة العامة */
+            --card-bg: rgba(255, 255, 255, 0.85); /* خلفية البطاقات مع شفافية */
+            --text-dark: #3E2723;        /* لون النص الأساسي */
+            --text-light: #FFFFFF;       /* لون النص الفاتح */
+        }
+
+        /* الإعدادات العامة */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* شريط التنقل العلوي */
+        header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 1.2rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(93, 64, 55, 0.15);
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .logo i {
+            color: var(--accent-color);
+        }
+
+        .time-badge {
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 4px 12px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+
+        /* الحاوية الرئيسية للشبكة (GRID) */
+        .main-container {
+            flex: 1;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.4rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+        }
+
+        /* إعدادات الـ GRID للبطاقات */
+        .grid-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            width: 100%;
+        }
+
+        /* تصميم البطاقة الاحترافية */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(141, 110, 99, 0.15);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(93, 64, 55, 0.04);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* تأثير ممتد عند تحويم الفأرة */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: var(--secondary-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 36px rgba(93, 64, 55, 0.12);
+            background: #FFFFFF;
+            border-color: var(--secondary-color);
+        }
+
+        /* تنسيق الأيقونات الاحترافية */
+        .icon-box {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(141, 110, 99, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .icon-box { /* تم تصحيح هذا السطر */
+            background-color: var(--primary-color);
+        }
+
+        .card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+
+        .card:hover i {
+            color: var(--secondary-color);
+        }
+
+        /* نصوص البطاقة */
+        .card h3 {
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .card p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* التذييل السفلي */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* التجاوب مع الشاشات الصغيرة (الجوال) */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 1.2rem 1rem;
+                text-align: center;
+            }
+            .main-container {
+                padding: 2rem 1.5rem;
+            }
+            .page-header {
+                margin-bottom: 2.5rem;
+            }
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            .page-header p {
+                font-size: 1rem;
+            }
+            .grid-wrapper {
+                /* إجبار البطاقات على الظهور في عمود واحد */
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .card {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-graduation-cap"></i>
+            منصة اللسانيات
+        </div>
+        <div class="time-badge">البوابة المعرفية الرئيسية</div>
+    </header>
+
+    <main class="main-container">
+        
+        <div class="page-header">
+            <h1>مرحباً بك في منصة اللسانيات</h1>
+            <p>اختر أحد الأقسام التخصصية للبدء في تصفح المحتوى اللغوي</p>
+        </div>
+
+        <div class="grid-wrapper">
+            
+            <div class="card" onclick="navigateTo('lessons')">
+                <div class="icon-box">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                </div>
+                <h3>الدروس</h3>
+                <p>مناهج تعليمية تخصصية ومحاضرات منظمة تشمل فروع اللسانيات العامة والتطبيقية.</p>
+            </div>
+
+            <div class="card" onclick="navigateTo('enrichment')">
+                <div class="icon-box">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <h3>المعلومات الإثرائية</h3>
+                <p>مقالات متعمقة، بحوث قصيرة، وإضاءات معرفية دقيقة تدعم الحصيلة اللغوية.</p>
+            </div>
+
+            <div class="card" onclick="navigateTo('references')">
+                <div class="icon-box">
+                    <i class="fa-solid fa-scroll"></i>
+                </div>
+                <h3>المصادر والمراجع</h3>
+                <p>دليل شامل لأمهات الكتب اللسانية، المعاجم، والأبحاث الأكاديمية المعتمدة.</p>
+            </div>
+
+            <div class="card" onclick="navigateTo('scholars')">
+                <div class="icon-box">
+                    <i class="fa-solid fa-signature"></i>
+                </div>
+                <h3>شخصيات لسانية</h3>
+                <p>توثيق لسير كبار علماء اللغة واللسانيات الذين أسسوا النظريات اللغوية قديمًا وحديثًا.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>جميع الحقوق محفوظة &copy; 2026 | منصة اللسانيات</p>
+    </footer>
+
+    <script>
+        // دالة التنقل الفورية عند الضغط على أي بطاقة في الشبكة
+        function navigateTo(sectionId) {
+            console.log("الانتقال إلى المعرف الداخلي للقسم الخاص بـ: " + sectionId);
+            
+            // مثال لإجراءات تفاعلية:
+            // window.location.href = sectionId + '.html';
+        }
+    </script>
+</body>
+</html>
