@@ -12,13 +12,13 @@
     <style>
         /* المتغيرات اللونية (تدرجات البني) */
         :root {
-            --primary-color: #5D4037;    /* بني غامق للهوية والعناصر الرئيسية */
-            --secondary-color: #8D6E63;  /* بني متوسط للنصوص الثانوية والأيقونات */
-            --accent-color: #D7CCC8;     /* بني فاتح للخلفيات والتفاصيل */
-            --bg-color: #F8F6F4;         /* خلفية الصفحة العامة */
-            --card-bg: rgba(255, 255, 255, 0.85); /* خلفية البطاقات مع شفافية */
-            --text-dark: #3E2723;        /* لون النص الأساسي */
-            --text-light: #FFFFFF;       /* لون النص الفاتح */
+            --primary-color: #5D4037;    
+            --secondary-color: #8D6E63;  
+            --accent-color: #D7CCC8;     
+            --bg-color: #F8F6F4;         
+            --card-bg: rgba(255, 255, 255, 0.85); 
+            --text-dark: #3E2723;        
+            --text-light: #FFFFFF;       
         }
 
         /* الإعدادات العامة */
@@ -98,12 +98,14 @@
             font-size: 1.1rem;
         }
 
-        /* إعدادات الـ GRID للبطاقات */
+        /* إعدادات الـ GRID للبطاقات - تم التعديل لتصبح 2x2 بشكل دائم على الشاشات الكبيرة */
         .grid-wrapper {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 30px;
             width: 100%;
+            max-width: 900px; /* لضبط العرض وجعل المربعات متناسقة أكثر */
+            margin: 0 auto;
         }
 
         /* تصميم البطاقة الاحترافية */
@@ -118,6 +120,11 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 1 / 1; /* لجعل البطاقة مربعة الشكل تماماً كالصورة المرجعية */
         }
 
         /* تأثير ممتد عند تحويم الفأرة */
@@ -153,11 +160,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 2rem;
+            margin: 0 auto 1.5rem;
             transition: all 0.3s ease;
         }
 
-        .card:hover .icon-box { /* تم تصحيح هذا السطر */
+        .card:hover .icon-box { 
             background-color: var(--primary-color);
         }
 
@@ -173,16 +180,10 @@
 
         /* نصوص البطاقة */
         .card h3 {
-            font-size: 1.6rem;
+            font-size: 1.8rem; /* تم تكبير الخط قليلاً لملء الفراغ بعد الحذف */
             color: var(--primary-color);
-            margin-bottom: 1rem;
+            margin-bottom: 0;
             font-weight: 600;
-        }
-
-        .card p {
-            color: #555;
-            font-size: 1rem;
-            line-height: 1.7;
         }
 
         /* التذييل السفلي */
@@ -216,12 +217,14 @@
                 font-size: 1rem;
             }
             .grid-wrapper {
-                /* إجبار البطاقات على الظهور في عمود واحد */
+                /* إجبار البطاقات على الظهور في عمود واحد في الجوال للحفاظ على التصميم */
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
             .card {
                 padding: 2rem 1.5rem;
+                aspect-ratio: auto;
+                min-height: 200px;
             }
         }
     </style>
@@ -250,7 +253,6 @@
                     <i class="fa-solid fa-book-open-reader"></i>
                 </div>
                 <h3>الدروس</h3>
-                <p>مناهج تعليمية تخصصية ومحاضرات منظمة تشمل فروع اللسانيات العامة والتطبيقية.</p>
             </div>
 
             <div class="card" onclick="navigateTo('enrichment')">
@@ -258,7 +260,6 @@
                     <i class="fa-solid fa-wand-magic-sparkles"></i>
                 </div>
                 <h3>المعلومات الإثرائية</h3>
-                <p>مقالات متعمقة، بحوث قصيرة، وإضاءات معرفية دقيقة تدعم الحصيلة اللغوية.</p>
             </div>
 
             <div class="card" onclick="navigateTo('references')">
@@ -266,7 +267,6 @@
                     <i class="fa-solid fa-scroll"></i>
                 </div>
                 <h3>المصادر والمراجع</h3>
-                <p>دليل شامل لأمهات الكتب اللسانية، المعاجم، والأبحاث الأكاديمية المعتمدة.</p>
             </div>
 
             <div class="card" onclick="navigateTo('scholars')">
@@ -274,7 +274,6 @@
                     <i class="fa-solid fa-signature"></i>
                 </div>
                 <h3>شخصيات لسانية</h3>
-                <p>توثيق لسير كبار علماء اللغة واللسانيات الذين أسسوا النظريات اللغوية قديمًا وحديثًا.</p>
             </div>
 
         </div>
@@ -285,12 +284,8 @@
     </footer>
 
     <script>
-        // دالة التنقل الفورية عند الضغط على أي بطاقة في الشبكة
         function navigateTo(sectionId) {
             console.log("الانتقال إلى المعرف الداخلي للقسم الخاص بـ: " + sectionId);
-            
-            // مثال لإجراءات تفاعلية:
-            // window.location.href = sectionId + '.html';
         }
     </script>
 </body>
